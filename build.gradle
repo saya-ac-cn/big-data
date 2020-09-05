@@ -1,0 +1,50 @@
+//配置所有项目公共内容，包含父项目
+allprojects {
+    //指定需要的插件
+    //指定语言
+    apply plugin: 'java'
+    apply plugin: 'scala'
+    //指定编辑器
+    apply plugin: 'idea'
+    //配置项目信息
+    group 'ac.cn.saya'
+    version '1.0.0'
+
+    //配置仓库
+    repositories {
+        mavenLocal()
+        //由于国内可能无法正常访问maven中心库
+        maven {
+            url "http://maven.aliyun.com/nexus/content/groups/public/"
+        }
+        mavenCentral()
+    }
+    
+}
+
+//配置子工程，不含父项目
+subprojects {
+    //指定编译版本
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+    // 指定编码格式
+    [compileJava,compileTestJava,javadoc]*.options*.encoding = 'UTF-8'
+    
+    //配置字符编码
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+
+    //配置全局依赖版本信息
+    ext {
+        scalaVersion = '2.12'
+        mysqlVersion = '8.0.20'
+        sparkVersion = '2.4.6'
+    }
+
+    //配置子模块依赖
+    dependencies {
+        //添加scala基本库
+        compile group: 'org.scala-lang', name: 'scala-library', version: "${scalaVersion}.8" 
+    }
+}

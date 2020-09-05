@@ -1,0 +1,1 @@
+As the original creators of Apache Spark, Delta Lake and MLflow, we believe the future of data and AI depends on open source software and the millions of developers who contribute to it every day. Build your business on a cloud-agnostic, open platform.
